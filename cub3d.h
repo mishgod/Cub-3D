@@ -234,7 +234,7 @@ void			ft_valid_map(char **arr, int n, int height);
 void			check_elem_maze(char **arr, int i, int j);
 void			ft_exit(char *line);
 void			ft_screenshot(t_all *vars, int w, int h);
-void			ft_parser(t_all *vars);
+void			ft_parser(t_all *vars, int i, int j);
 t_spr			*ft_find_sprites(t_all *vars);
 void			sprites_sort(t_all *vars, int n);
 void			make_proection(t_all *vars, double *z_buffer);

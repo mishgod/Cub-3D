@@ -37,6 +37,8 @@ void		find_path(t_all *vars, int i, t_side *side, char ltr)
 		ft_exit("Error: map is invalid");
 	side->img.img = mlx_xpm_file_to_image(vars->mlx, arr[1], &side->width, \
 		&side->height);
+	if (side->img.img == NULL)
+		ft_exit("Error: empty xpm file");
 	side->img.addr = mlx_get_data_addr(side->img.img, \
 		&side->img.bits_per_pixel, &side->img.line_length, &side->img.endian);
 	free(arr[1]);

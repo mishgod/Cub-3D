@@ -20,8 +20,7 @@ $(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
-	${CC} ${CFLAGS} -L. -lcub -Lmlx -lmlx -Llib -lft -framework OpenGL -framework AppKit -o cub3D \
-	&& ./cub3D map.cub --save
+	${CC} ${CFLAGS} -L. -lcub -Lmlx -lmlx -Llib -lft -framework OpenGL -framework AppKit -o cub3D
 
 all: $(NAME)
 

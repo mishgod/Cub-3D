@@ -72,12 +72,8 @@ static void	check_somth(t_all *vars)
 		ft_exit("error: invalid map");
 }
 
-void		ft_parser(t_all *vars)
+void		ft_parser(t_all *vars, int i, int j)
 {
-	int		i;
-	int		j;
-
-	i = 0;
 	while (i < vars->map.height)
 	{
 		j = 0;
@@ -93,6 +89,10 @@ void		ft_parser(t_all *vars)
 				break ;
 			if (parcer_sprite_tex(vars, i, j))
 				break ;
+			if (vars->map.arr[i][0] == '\0')
+				break ;
+			if (vars->pars.num_of_params < 9)
+				ft_exit("Error: invalid map");
 			j++;
 		}
 		check_num_of_params(vars, i);

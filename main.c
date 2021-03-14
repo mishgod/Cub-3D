@@ -75,9 +75,11 @@ int		main(int argc, char **argv)
 	while (get_next_line(fd, &line))
 		ft_lstadd_back(&vars.map.pointer, ft_lstnew(line));
 	ft_lstadd_back(&vars.map.pointer, ft_lstnew(line));
+	if (vars.map.pointer == NULL)
+		ft_exit("Error: empty map");
 	vars.map.arr = map_array(&vars.map.pointer, ft_lstsize(vars.map.pointer));
 	vars.map.height = ft_lstsize(vars.map.pointer);
-	ft_parser(&vars);
+	ft_parser(&vars, 0, 0);
 	ft_valid_map(vars.map.arr, vars.pars.last_param, vars.map.height);
 	if (argc == 2)
 		creating_window(&vars);
