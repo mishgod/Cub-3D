@@ -12,23 +12,6 @@
 
 #include "cub3d.h"
 
-char	**map_array(t_list **map, int size)
-{
-	char	**map_arr;
-	int		i;
-	t_list	*tmp;
-
-	map_arr = ft_calloc(size, sizeof(char*));
-	i = 0;
-	tmp = *map;
-	while (i != size)
-	{
-		map_arr[i++] = tmp->line;
-		tmp = tmp->next;
-	}
-	return (map_arr);
-}
-
 int		render_frame(t_all *vars)
 {
 	int		i;
@@ -45,28 +28,12 @@ int		render_frame(t_all *vars)
 		vars->map.y = (int)vars->plr.pos.y;
 		vars->ray.delta_dist.x = absolute(1 / vars->ray.dir.x);
 		vars->ray.delta_dist.y = absolute(1 / vars->ray.dir.y);
-		draw_walls(vars, i, z_buffer);
+		walls(vars, i, z_buffer);
 		i++;
 	}
 	draw_sprites(vars, z_buffer);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	return (0);
-}
-
-void	set_vars(t_all *vars)
-{
-	vars->tex.sprite.exist = -1;
-	vars->tex.south.exist = -1;
-	vars->tex.north.exist = -1;
-	vars->tex.west.exist = -1;
-	vars->tex.east.exist = -1;
-	vars->set.exist_resol = -1;
-	vars->pars.ceil.exist = -1;
-	vars->pars.flr.exist = -1;
-	vars->pars.num_of_params = 0;
-	vars->pars.num_of_nswe = -1;
-	vars->set.move_speed = 0.101;
-	vars->set.rot_speed = M_PI_2 / 45;
 }
 
 void	creating_window(t_all *vars)
@@ -92,74 +59,28 @@ void	creating_window(t_all *vars)
 	mlx_loop(vars->mlx);
 }
 
-
-
-void	check_map_name(char *name)
+int		main(int argc, char **argv)
 {
-
-	while (*name != '.')
-	{
-		name++;
-	}
-	name++;
-	if (ft_strncmp(name, "cub", 4))
-		ft_exit("error: invalid map name");
-}
-
-
-
-int 	main(int argc, char **argv)
-{
-	int 	fd;
+	int		fd;
 	char	*line;
 	t_all	vars;
 
-	check_map_name(argv[1]);
-	vars.mlx = mlx_init();
-	set_vars(&vars);
-	vars.map.pointer = NULL;
 	line = NULL;
+	check_input_data(argc, argv);
+	set_vars(&vars, argc);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_exit("error: file didnt read");
+	vars.mlx = mlx_init();
 	while (get_next_line(fd, &line))
 		ft_lstadd_back(&vars.map.pointer, ft_lstnew(line));
 	ft_lstadd_back(&vars.map.pointer, ft_lstnew(line));
 	vars.map.arr = map_array(&vars.map.pointer, ft_lstsize(vars.map.pointer));
 	vars.map.height = ft_lstsize(vars.map.pointer);
-	mlx_get_screen_size(&vars.set.monitor.x, &vars.set.monitor.y);
 	ft_parser(&vars);
 	ft_valid_map(vars.map.arr, vars.pars.last_param, vars.map.height);
-	//ft_free_list(vars.map.pointer);
 	if (argc == 2)
 		creating_window(&vars);
 	if (argc == 3)
-		ft_screenshot(&vars);
+		ft_screenshot(&vars, vars.set.screen_width, vars.set.screen_height);
 }
-
-//screenshot
-//makefile - libraries
-//norms exe, sprites
-//parser?
-//на ошибки маллока
-/*
-
-
-
-
-
-        1111111111111111111111111
-        1000000000110000000000001
-        1011000001110000002000001
-        1001220000W00000000000001
-111111111011200001110000000000001
-100000000011000001110111111111111
-11110111111111011100000010001
-11110111111111011101010010001
-11000000110101011100000010001
-10002000000000001100000010001
-10000000000000000001010000001
-1100000111010101111101111000111
-11110111 1110101 101111010001
-11111111 1111111 111111111111
- */

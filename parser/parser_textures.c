@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_textures.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbooker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 14:35:59 by rbooker           #+#    #+#             */
+/*   Updated: 2021/03/12 14:36:01 by rbooker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
 
 int		parcer_north_south_tex(t_all *vars, int i, int j)
 {
@@ -9,7 +21,6 @@ int		parcer_north_south_tex(t_all *vars, int i, int j)
 			find_path(vars, i, &vars->tex.north, 'N');
 			vars->tex.north.exist++;
 			vars->pars.num_of_params++;
-
 			return (1);
 		}
 		else

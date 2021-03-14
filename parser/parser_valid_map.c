@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_valid_map.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbooker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 14:36:08 by rbooker           #+#    #+#             */
+/*   Updated: 2021/03/12 14:36:10 by rbooker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
 
 static void	check_first_last_line(char *line0, char *line_n)
 {
@@ -44,49 +56,23 @@ void		check_trash(char **arr, int height, int n)
 		while (arr[n][j])
 		{
 			c = arr[n][j];
-			if (c != '1' && c != ' ' && c != '0' && c != 'W' && c != 'E' && c != 'S' && c != 'N' && c != '2')
-				ft_exit("error: invalid map");
+			if (c != '1' && c != ' ' && c != '0' && c != 'W' && \
+			c != 'E' && c != 'S' && c != 'N' && c != '2')
+				ft_exit("error: invalid map - trash");
 			j++;
 		}
 		n++;
 	}
 }
 
-static int	max_size(char *line1, char *line2)
+static void	check_maze(char **arr, int height, int i)
 {
-	if (ft_strlen(line1) > ft_strlen(line2))
-		return (ft_strlen(line2));
-	else
-		return (ft_strlen(line1));
-}
-
-static void	check_maze(char **arr, int height, int i, int max)
-{
-	int j;
+	int	j;
 
 	while (i < height - 1)
 	{
 		j = 1;
-		max = max_size(arr[i - 1], arr[i + 1]);
-		while (arr[i][j] && j < max)
-		{
-			if (arr[i][j] == '0' || arr[i][j] == '2' || arr[i][j] == 'W' || \
-				arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'S')
-			{
-				if (arr[i - 1][j] == ' ' || arr[i + 1][j] == ' ' || \
-					arr[i][j - 1] == ' ' || arr[i][j + 1] == ' ' || \
-					arr[i][j + 1] == '\0')
-					ft_exit("Error: map is invalid");
-			}
-			j++;
-		}
-		while (arr[i][j])
-		{
-			if (arr[i][j] == '0' || arr[i][j] == '2' || arr[i][j] == 'W' || \
-				arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'S')
-				ft_exit("Error: map is invalid");
-			j++;
-		}
+		check_elem_maze(arr, i, j);
 		i++;
 	}
 }
@@ -96,5 +82,5 @@ void		ft_valid_map(char **arr, int n, int height)
 	check_trash(arr, height, n);
 	check_first_last_line(arr[n], arr[height - 1]);
 	check_borders(arr, n, height);
-	check_maze(arr, height, n + 1, 0);
+	check_maze(arr, height, n + 1);
 }

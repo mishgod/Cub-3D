@@ -1,10 +1,23 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites_structures.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbooker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 14:55:09 by rbooker           #+#    #+#             */
+/*   Updated: 2021/03/12 14:55:11 by rbooker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
 
 t_spr	*ft_spr_new(double x, double y)
 {
 	t_spr	*new;
 
-	new = malloc(sizeof(t_spr));
+	if (!(new = ft_calloc(1, sizeof(t_spr))))
+		ft_exit("error: memory is not allocated");
 	new->pos.x = x;
 	new->pos.y = y;
 	new->next = NULL;
@@ -20,7 +33,7 @@ t_spr	*ft_spr_last(t_spr *spr)
 	return (spr);
 }
 
-t_spr	*ft_spr_num(t_spr *spr, int n) //n начинается с 0
+t_spr	*ft_spr_num(t_spr *spr, int n)
 {
 	int	i;
 
@@ -35,8 +48,10 @@ t_spr	*ft_spr_num(t_spr *spr, int n) //n начинается с 0
 
 void	ft_spr_add_back(t_all *vars, t_spr **spr, t_spr *new, int i)
 {
-	t_spr *last;
+	t_spr	*last;
+	t_vect	*pos;
 
+	pos = &vars->plr.pos;
 	if ((*spr) != NULL)
 	{
 		last = ft_spr_last(*spr);
@@ -45,10 +60,11 @@ void	ft_spr_add_back(t_all *vars, t_spr **spr, t_spr *new, int i)
 	else
 		*spr = new;
 	new->order = i;
-	new->dist = (vars->plr.pos.x - new->pos.x) * (vars->plr.pos.x - new->pos.x) + (vars->plr.pos.y - new->pos.y) * (vars->plr.pos.y - new->pos.y);
+	new->dist = (pos->x - new->pos.x) * (pos->x - new->pos.x) + \
+	(pos->y - new->pos.y) * (pos->y - new->pos.y);
 }
 
-void	ft_spr_add_new_back(t_all *vars, t_spr **spr, t_spr *new, int i)
+void	ft_spr_add_new_back(t_spr **spr, t_spr *new, int i)
 {
 	t_spr *last;
 	t_spr *new_spr;
