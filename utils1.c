@@ -14,6 +14,13 @@
 
 void	set_vars(t_all *vars, int argc)
 {
+	vars->fl.press = 0;
+	vars->fl.left = 0;
+	vars->fl.right = 0;
+	vars->fl.s = 0;
+	vars->fl.w = 0;
+	vars->fl.a = 0;
+	vars->fl.d = 0;
 	mlx_get_screen_size(&vars->set.monitor.x, &vars->set.monitor.y);
 	vars->map.pointer = NULL;
 	vars->tex.sprite.exist = -1;
@@ -27,7 +34,7 @@ void	set_vars(t_all *vars, int argc)
 	vars->pars.num_of_params = 0;
 	vars->pars.num_of_nswe = -1;
 	vars->set.move_speed = 0.101;
-	vars->set.rot_speed = M_PI_2 / 45;
+	vars->set.rot_speed = M_PI_2 / 30;
 	vars->set.argc = argc;
 }
 

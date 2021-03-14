@@ -33,6 +33,8 @@ int		render_frame(t_all *vars)
 	}
 	draw_sprites(vars, z_buffer);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	if (vars->fl.press == 1)
+		movement(vars);
 	return (0);
 }
 
@@ -53,7 +55,8 @@ void	creating_window(t_all *vars)
 	img->img = mlx_new_image(vars->mlx, w, h);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, \
 	&img->line_length, &img->endian);
-	mlx_hook(vars->win, 2, 1L << 0, press_key, vars);
+	mlx_hook(vars->win, 3, 1L << 1, &key_release, vars);
+	mlx_hook(vars->win, 2, 1L << 0, &key_press, vars);
 	mlx_hook(vars->win, 17, 1L << 0, closed, vars);
 	mlx_loop_hook(vars->mlx, render_frame, vars);
 	mlx_loop(vars->mlx);

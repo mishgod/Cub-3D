@@ -12,14 +12,14 @@
 
 #include "cub3d.h"
 
-static void	turn_left_right(int code, t_all *vars, t_vect *dir, t_vect *plane)
+static void	turn_left_right(t_all *vars, t_vect *dir, t_vect *plane)
 {
 	double	old_dir_x;
 	double	old_plane_x;
 	double	rot_speed;
 
 	rot_speed = vars->set.rot_speed;
-	if (code == 124)
+	if (vars->fl.right)
 	{
 		old_dir_x = dir->x;
 		dir->x = dir->x * cos(rot_speed) - dir->y * sin(rot_speed);
@@ -28,7 +28,7 @@ static void	turn_left_right(int code, t_all *vars, t_vect *dir, t_vect *plane)
 		plane->x = plane->x * cos(rot_speed) - plane->y * sin(rot_speed);
 		plane->y = old_plane_x * sin(rot_speed) + plane->y * cos(rot_speed);
 	}
-	if (code == 123)
+	if (vars->fl.left)
 	{
 		old_dir_x = dir->x;
 		dir->x = dir->x * cos(-rot_speed) - dir->y * sin(-rot_speed);
@@ -39,7 +39,7 @@ static void	turn_left_right(int code, t_all *vars, t_vect *dir, t_vect *plane)
 	}
 }
 
-static void	forward_back(int code, t_all *vars, double m_s)
+static void	forward_back(t_all *vars, double m_s)
 {
 	t_vect	*pos;
 	t_vect	*dir;
@@ -48,7 +48,7 @@ static void	forward_back(int code, t_all *vars, double m_s)
 	pos = &vars->plr.pos;
 	dir = &vars->plr.dir;
 	arr = vars->map.arr;
-	if (code == 126 || code == 13)
+	if (vars->fl.w)
 	{
 		if (*(*(arr + (int)(pos->y)) + (int)(pos->x + dir->x * m_s)) != '1' \
 		&& *(*(arr + (int)(pos->y)) + (int)(pos->x + dir->x * m_s)) != '2')
@@ -57,7 +57,7 @@ static void	forward_back(int code, t_all *vars, double m_s)
 		&& *(*(arr + (int)(pos->y + dir->y * m_s)) + (int)(pos->x)) != '2')
 			pos->y += dir->y * m_s;
 	}
-	if (code == 125 || code == 1)
+	if (vars->fl.s)
 	{
 		if (*(*(arr + (int)(pos->y)) + (int)(pos->x - dir->x * m_s)) != '1' \
 		&& *(*(arr + (int)(pos->y)) + (int)(pos->x - dir->x * m_s)) != '2')
@@ -68,7 +68,7 @@ static void	forward_back(int code, t_all *vars, double m_s)
 	}
 }
 
-static void	go_right(int keycode, t_all *vars, double m_s)
+static void	go_right(t_all *vars, double m_s)
 {
 	double	ndir_x;
 	double	ndir_y;
@@ -77,7 +77,7 @@ static void	go_right(int keycode, t_all *vars, double m_s)
 
 	pos = &vars->plr.pos;
 	arr = vars->map.arr;
-	if (keycode == 2)
+	if (vars->fl.d)
 	{
 		ndir_x = -vars->plr.dir.y;
 		ndir_y = vars->plr.dir.x;
@@ -90,7 +90,7 @@ static void	go_right(int keycode, t_all *vars, double m_s)
 	}
 }
 
-static void	go_left(int keycode, t_all *vars, double m_s)
+static void	go_left(t_all *vars, double m_s)
 {
 	double	ndir_x;
 	double	ndir_y;
@@ -99,7 +99,7 @@ static void	go_left(int keycode, t_all *vars, double m_s)
 
 	pos = &vars->plr.pos;
 	arr = vars->map.arr;
-	if (keycode == 0)
+	if (vars->fl.a)
 	{
 		ndir_x = vars->plr.dir.y;
 		ndir_y = -vars->plr.dir.x;
@@ -112,13 +112,10 @@ static void	go_left(int keycode, t_all *vars, double m_s)
 	}
 }
 
-int			press_key(int keycode, t_all *vars)
+void		movement(t_all *vars)
 {
-	if (keycode == 53)
-		closed(vars);
-	turn_left_right(keycode, vars, &vars->plr.dir, &vars->plr.plane);
-	forward_back(keycode, vars, vars->set.move_speed);
-	go_left(keycode, vars, vars->set.move_speed);
-	go_right(keycode, vars, vars->set.move_speed);
-	return (0);
+	turn_left_right(vars, &vars->plr.dir, &vars->plr.plane);
+	forward_back(vars, vars->set.move_speed);
+	go_left(vars, vars->set.move_speed);
+	go_right(vars, vars->set.move_speed);
 }

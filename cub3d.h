@@ -156,6 +156,17 @@ typedef struct	s_pars
 	int		num_of_nswe;
 }				t_pars;
 
+typedef struct	s_flags
+{
+	short	press;
+	short	w;
+	short	a;
+	short	s;
+	short	d;
+	short	left;
+	short	right;
+}				t_flags;
+
 typedef struct	s_all
 {
 	t_tex	tex;
@@ -167,6 +178,7 @@ typedef struct	s_all
 	t_scr	scr;
 	t_spr	*spr;
 	t_pars	pars;
+	t_flags	fl;
 
 	void	*mlx;
 	void	*win;
@@ -207,7 +219,6 @@ t_list			*ft_lstlast(t_list *lst);
 int				ft_lstsize(t_list *lst);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 double			absolute(double num);
-int				press_key(int keycode, t_all *vars);
 int				closed(t_all *vars);
 void			ft_background(t_all *vars);
 void			my_mlx_pixel_put(t_all *vars, int x, int y, int color);
@@ -242,5 +253,8 @@ void			set_vars(t_all *vars, int argc);
 char			**map_array(t_list **map, int size);
 void			check_input_data(int argc, char **argv);
 void			find_coordinations(t_all *vars);
+int				key_release(int keycode, t_all *vars);
+int				key_press(int keycode, t_all *vars);
+void			movement(t_all *vars);
 
 #endif

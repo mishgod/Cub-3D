@@ -1,13 +1,10 @@
 R 1920 1080
-
 NO ./textures/cat1.xpm
 SO ./textures/cat2.xpm
 WE ./textures/cat3.xpm
 EA ./textures/cat4.xpm
 S ./textures/barrel.xpm
- F 0,80,0
-
-
+F 0,80,0
 C 0,206,209
 
         1111111111111111111111111
