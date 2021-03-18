@@ -17,7 +17,7 @@ t_list	*ft_lstnew(void *content)
 	t_list *new;
 
 	if (!(new = malloc(sizeof(t_list))))
-		ft_exit("error: memory is not allocated");
+		ft_exit("Error\nmemory is not allocated");
 	new->line = content;
 	new->next = NULL;
 	return (new);

@@ -24,7 +24,7 @@ int		parcer_north_south_tex(t_all *vars, int i, int j)
 			return (1);
 		}
 		else
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 	}
 	if (vars->map.arr[i][j] == 'S' && vars->map.arr[i][j + 1] == 'O')
 	{
@@ -36,7 +36,7 @@ int		parcer_north_south_tex(t_all *vars, int i, int j)
 			return (1);
 		}
 		else
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 	}
 	return (0);
 }
@@ -53,7 +53,7 @@ int		parcer_west_east_tex(t_all *vars, int i, int j)
 			return (1);
 		}
 		else
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 	}
 	if (vars->map.arr[i][j] == 'E' && vars->map.arr[i][j + 1] == 'A')
 	{
@@ -65,7 +65,7 @@ int		parcer_west_east_tex(t_all *vars, int i, int j)
 			return (1);
 		}
 		else
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 	}
 	return (0);
 }

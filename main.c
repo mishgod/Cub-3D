@@ -73,13 +73,13 @@ int		main(int argc, char **argv)
 	set_vars(&vars, argc);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		ft_exit("error: file didnt read");
+		ft_exit("Error\nfile didnt read");
 	vars.mlx = mlx_init();
 	while (get_next_line(fd, &line))
 		ft_lstadd_back(&vars.map.pointer, ft_lstnew(line));
 	ft_lstadd_back(&vars.map.pointer, ft_lstnew(line));
 	if (vars.map.pointer == NULL)
-		ft_exit("Error: empty map");
+		ft_exit("Error\nempty map");
 	vars.map.arr = map_array(&vars.map.pointer, ft_lstsize(vars.map.pointer));
 	vars.map.height = ft_lstsize(vars.map.pointer);
 	ft_parser(&vars, 0, 0);

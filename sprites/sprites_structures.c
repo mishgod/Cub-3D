@@ -17,7 +17,7 @@ t_spr	*ft_spr_new(double x, double y)
 	t_spr	*new;
 
 	if (!(new = ft_calloc(1, sizeof(t_spr))))
-		ft_exit("error: memory is not allocated");
+		ft_exit("Error\nmemory is not allocated");
 	new->pos.x = x;
 	new->pos.y = y;
 	new->next = NULL;

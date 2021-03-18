@@ -24,7 +24,7 @@ static void	check_all_parameters(t_all *vars)
 	if (tex->east.exist || tex->sprite.exist || tex->west.exist || \
 	tex->south.exist || tex->north.exist || set->exist_resol || \
 	pars->ceil.exist || pars->flr.exist)
-		ft_exit("Error: map is invalid");
+		ft_exit("Error\nmap is invalid");
 }
 
 static void	check_nswe(int *num, int i, char **arr, int height)
@@ -65,11 +65,11 @@ static void	check_somth(t_all *vars)
 	check_all_parameters(vars);
 	check_nswe(&vars->pars.num_of_nswe, vars->pars.last_param + 1, arr, height);
 	if (vars->pars.num_of_nswe)
-		ft_exit("error: invalid map");
+		ft_exit("Error\ninvalid map");
 	while (!(vars->map.arr[vars->pars.last_param][0]))
 		vars->pars.last_param++;
 	if (vars->map.arr[vars->pars.last_param] == NULL)
-		ft_exit("error: invalid map");
+		ft_exit("Error\ninvalid map");
 }
 
 void		ft_parser(t_all *vars, int i, int j)
@@ -92,7 +92,7 @@ void		ft_parser(t_all *vars, int i, int j)
 			if (vars->map.arr[i][0] == '\0')
 				break ;
 			if (vars->pars.num_of_params < 9)
-				ft_exit("Error: invalid map");
+				ft_exit("Error\ninvalid map");
 			j++;
 		}
 		check_num_of_params(vars, i);

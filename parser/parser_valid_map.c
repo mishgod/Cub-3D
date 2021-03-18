@@ -20,14 +20,14 @@ static void	check_first_last_line(char *line0, char *line_n)
 	while (line0[i])
 	{
 		if (line0[i] != '1' && line0[i] != ' ')
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		i++;
 	}
 	i = 0;
 	while (line_n[i])
 	{
 		if (line_n[i] != '1' && line_n[i] != ' ')
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		i++;
 	}
 }
@@ -37,10 +37,10 @@ static void	check_borders(char **arr, int i, int height)
 	while (i < height - 1)
 	{
 		if (arr[i][0] != '1' && arr[i][0] != ' ')
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		if (arr[i][ft_strlen(arr[i]) - 1] != '1' && \
 			arr[i][ft_strlen(arr[i]) - 1] != ' ')
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		i++;
 	}
 }
@@ -58,7 +58,7 @@ void		check_trash(char **arr, int height, int n)
 			c = arr[n][j];
 			if (c != '1' && c != ' ' && c != '0' && c != 'W' && \
 			c != 'E' && c != 'S' && c != 'N' && c != '2')
-				ft_exit("error: invalid map - trash");
+				ft_exit("Error\ninvalid map - trash");
 			j++;
 		}
 		n++;

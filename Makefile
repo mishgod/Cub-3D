@@ -2,7 +2,7 @@ NAME	= libcub.a
 
 CC		= gcc
 
-CFLAGS	=  -Wall # -Werror -Wextra #-fsanitize=address
+CFLAGS	=  -Wall  -Werror -Wextra
 
 SOURCES	= main.c gnl/get_next_line.c gnl/get_next_line_utils.c lists.c utils.c press_key.c \
                 player_starting_position.c walls/walls.c  walls/walls_calculations.c sprites/sprites_structures.c \
@@ -20,17 +20,18 @@ $(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
-	${CC} ${CFLAGS} -L. -lcub -Lmlx -lmlx -Llib -lft -framework OpenGL -framework AppKit -o cub3D && ./cub3D map.cub
+	${CC} ${CFLAGS} -L. -lcub -Lmlx -lmlx -Llib -lft -framework OpenGL -framework AppKit -o cub3D
 
 all: $(NAME)
 
-.c.o:
+.c.o: $(HEADER)
 	${CC} $(CFLAGS) -I ${HEADER} -c $< -o $@
 
 .PHONY: all clean fclean re
 
 clean:
 	-rm -f $(OBJECTS)
+	-make clean -C lib/
 
 fclean: clean
 	-make fclean -C lib/

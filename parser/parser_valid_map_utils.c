@@ -33,7 +33,7 @@ void		check_elem_maze(char **arr, int i, int j)
 			if (arr[i - 1][j] == ' ' || arr[i + 1][j] == ' ' || \
 					arr[i][j - 1] == ' ' || arr[i][j + 1] == ' ' || \
 					arr[i][j + 1] == '\0')
-				ft_exit("Error: map is invalid");
+				ft_exit("Error\nmap is invalid");
 		}
 		j++;
 	}
@@ -41,7 +41,7 @@ void		check_elem_maze(char **arr, int i, int j)
 	{
 		if (arr[i][j] == '0' || arr[i][j] == '2' || arr[i][j] == 'W' || \
 				arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'S')
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		j++;
 	}
 }

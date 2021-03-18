@@ -45,7 +45,7 @@ char	**map_array(t_list **map, int size)
 	t_list	*tmp;
 
 	if (!(map_arr = ft_calloc(size, sizeof(char*))))
-		ft_exit("error: memory is not allocated");
+		ft_exit("Error\nmemory is not allocated");
 	i = 0;
 	tmp = *map;
 	while (i != size)

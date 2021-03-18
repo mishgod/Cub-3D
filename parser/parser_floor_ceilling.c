@@ -18,11 +18,11 @@ static void	for_set_color(char *line, t_clr *clr, int j)
 
 	i = 0;
 	if (!(line))
-		ft_exit("Error: invalid map");
+		ft_exit("Error\ninvalid map");
 	while (line[i])
 	{
 		if (!(line[i] >= '0' && line[i] <= '9'))
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		i++;
 	}
 	if (j == 0)
@@ -41,7 +41,7 @@ static void	set_color(char *line, t_clr *clr)
 
 	j = 0;
 	if (!(arr = ft_split(line, ',')))
-		ft_exit("error: memory is not allocated");
+		ft_exit("Error\nmemory is not allocated");
 	while (j < 3)
 	{
 		for_set_color(arr[j], clr, j);
@@ -53,7 +53,7 @@ static void	set_color(char *line, t_clr *clr)
 	free(arr);
 	if (clr->r > 255 || clr->r < 0 || clr->g > 255 || \
 	clr->g < 0 || clr->b > 255 || clr->b < 0)
-		ft_exit("Error: map is invalid");
+		ft_exit("Error\nmap is invalid");
 }
 
 static void	check_data(char *line1, char *line2)
@@ -62,11 +62,11 @@ static void	check_data(char *line1, char *line2)
 
 	j = 0;
 	if (!(line1))
-		ft_exit("Error: map is invalid");
+		ft_exit("Error\nmap is invalid");
 	while (line2[j])
 	{
 		if (!((line2[j] >= '0' && line2[j] <= '9') || line2[j] <= ','))
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		j++;
 	}
 }
@@ -78,19 +78,19 @@ static void	parser(t_all *vars, int i, t_clr *clr, char ltr)
 
 	line = vars->map.arr[i];
 	if (!(arr = ft_split(line, ' ')))
-		ft_exit("error: memory is not allocated");
+		ft_exit("Error\nmemory is not allocated");
 	if (arr[0][0] == ltr)
 	{
 		check_data(arr[0], arr[1]);
 		if (arr[2])
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		set_color(arr[1], clr);
 		free(arr[1]);
 		free(arr[0]);
 		free(arr);
 	}
 	else
-		ft_exit("Error: map is invalid");
+		ft_exit("Error\nmap is invalid");
 }
 
 int			parser_floor_ceilling(t_all *vars, int i, int j)
@@ -105,7 +105,7 @@ int			parser_floor_ceilling(t_all *vars, int i, int j)
 			return (1);
 		}
 		else
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 	}
 	if (vars->map.arr[i][j] == 'C')
 	{
@@ -117,7 +117,7 @@ int			parser_floor_ceilling(t_all *vars, int i, int j)
 			return (1);
 		}
 		else
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 	}
 	return (0);
 }

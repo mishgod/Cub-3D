@@ -78,7 +78,7 @@ static void	write_head(int fd, t_all *vars)
 	int				w;
 
 	if (fd == -1)
-		ft_exit("Error: file save.bmp does not created");
+		ft_exit("Error\nfile save.bmp does not created");
 	w = vars->set.screen_width;
 	h = vars->set.screen_height;
 	set_headers(&ihead, &fhead, h, w);
@@ -112,6 +112,6 @@ void		ft_screenshot(t_all *vars, int w, int h)
 	}
 	a = close(fd);
 	if (a == -1)
-		ft_exit("Error: file save.bmp does not closed");
+		ft_exit("Error\nfile save.bmp does not closed");
 	ft_exit("Screenshot is created, file's name is save.bmp");
 }

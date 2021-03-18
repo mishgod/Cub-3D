@@ -21,12 +21,12 @@ static int	find_screen_side(char *line)
 	while (line[j])
 	{
 		if (!(line[j] >= '0' && line[j] <= '9'))
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		j++;
 	}
 	side = ft_atoi(line);
 	if (side < 1)
-		ft_exit("Error: map is invalid");
+		ft_exit("Error\nmap is invalid");
 	return (side);
 }
 
@@ -45,21 +45,21 @@ static void	parser(t_all *vars, int i)
 	char	**arr;
 
 	if (!(arr = ft_split(vars->map.arr[i], ' ')))
-		ft_exit("error: memory is not allocated");
+		ft_exit("Error\nmemory is not allocated");
 	if (arr[0][0] == 'R')
 	{
 		if (!(arr[1]))
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		if (!(arr[2]))
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		vars->set.screen_width = find_screen_side(arr[1]);
 		vars->set.screen_height = find_screen_side(arr[2]);
 		if (arr[3])
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 		free_arr(arr, 3);
 	}
 	else
-		ft_exit("Error: map is invalid");
+		ft_exit("Error\nmap is invalid");
 }
 
 static void	change_resolution(t_all *vars)
@@ -93,7 +93,7 @@ int			parser_resolution(t_all *vars, int i, int j)
 			return (1);
 		}
 		else
-			ft_exit("Error: map is invalid");
+			ft_exit("Error\nmap is invalid");
 	}
 	return (0);
 }
