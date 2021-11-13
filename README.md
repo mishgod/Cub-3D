@@ -9,7 +9,7 @@ Project is used the `miniLibX`.
 
 Here my own library - [libft](https://github.com/mishgod/libft) was used.
 
-Compilation was with flags: `gcc -Wall -Wextra -Werror`.
+Compilation was with flags: `gcc -Wall -Wextra -Werror -L. -lcub -Lmlx -lmlx -Llib -lft -framework OpenGL -framework AppKit`.
 
 Project has written in accordance with the Norminette.
 
