@@ -15,15 +15,25 @@ Project has written in accordance with the Norminette.
 
 No memory leaks.
 
-## Requirements
+## Management
 
+The left and right arrow keys of the keyboard allow you to look left and
+right in the maze.
 
+◦ The W, A, S, and D keys allow you to move the point of view through
+the maze.
+
+◦ Pressing ESC must close the window and quit the program.
 
 ## Usage
 
 Use `make` to compile the executable file.
 
-Use `./Cub-3D` to launch program.
+Use `./Cub-3D map.cub` to launch program. `map.cub` is the map, so you can use some different maps that must be valid.
+
+You can use some different textures. To do this just download it to the direction `textures` in `.xpm` format. It may have different resolution.
+
+Use `/Cub-3D map.cub --save` to make the screenshot `save.bmp`.
 
 Use `make re` to recompile.
 

@@ -20,7 +20,7 @@ $(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
-	${CC} ${CFLAGS} -L. -lcub -Lmlx -lmlx -Llib -lft -framework OpenGL -framework AppKit -o cub3D
+	${CC} ${CFLAGS} -L. -lcub -Lmlx -lmlx -Llib -lft -framework OpenGL -framework AppKit -o Cub3D
 
 all: $(NAME)
 
